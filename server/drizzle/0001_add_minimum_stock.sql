@@ -1,1 +1,0 @@
-ALTER TABLE "product_pricing_policy" ADD COLUMN "minimum_stock_qty" numeric(18, 4);
