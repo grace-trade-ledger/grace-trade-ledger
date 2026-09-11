@@ -232,6 +232,26 @@ export const costAllocationLines = pgTable("cost_allocation_lines", {
   allocationBasisValue: numeric("allocation_basis_value", { precision: 18, scale: 6 }),
 });
 
+/**
+ * Correction trail for an import item AFTER the import has already been finalized (status COSTED)
+ * and its landed cost has been rolled into inventory — e.g. the actual freight invoice came in
+ * different from what was estimated, or a received-quantity count was wrong. Never overwrites the
+ * original import_items row silently: each correction is its own audit row recording the delta and
+ * the before/after landed unit cost, per Grace's 2026-09-11 request (edit-before-finalize vs.
+ * correct-after-finalize are two different code paths — this table only backs the latter).
+ */
+export const importItemCorrections = pgTable("import_item_corrections", {
+  id: id(),
+  importItemId: uuid("import_item_id").notNull().references(() => importItems.id),
+  quantityDelta: money("quantity_delta").notNull().default("0"),
+  costDelta: money("cost_delta").notNull().default("0"),
+  landedUnitCostBefore: money("landed_unit_cost_before").notNull(),
+  landedUnitCostAfter: money("landed_unit_cost_after").notNull(),
+  reason: text("reason").notNull(),
+  createdById: uuid("created_by_id").notNull().references(() => users.id),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 // ============================================================
 // D3 — Inventory
 // ============================================================
