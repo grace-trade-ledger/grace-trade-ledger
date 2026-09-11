@@ -33,10 +33,10 @@ const dict: Record<Lang, Dict> = {
     loading: "載入參考資料中…",
     connError: (msg: string) => `無法連線後端 API：${msg}（請確認 server 是否已啟動於 :4000）`,
     nav: {
-      dashboard: "01・總覽",
-      import: "06-07・進口＋Landed Cost",
-      quotation: "10・報價單",
-      sales: "10・訂單 → 收款",
+      dashboard: "總覽",
+      import: "進口管理",
+      quotation: "報價單",
+      sales: "訂單管理",
     },
     common: {
       product: "商品", qty: "數量", price: "單價", amount: "金額", cost: "成本", profit: "利潤", margin: "毛利率",
@@ -80,10 +80,10 @@ const dict: Record<Lang, Dict> = {
     loading: "参照データを読み込み中…",
     connError: (msg: string) => `バックエンドAPIに接続できません：${msg}（サーバーが :4000 で起動しているか確認してください）`,
     nav: {
-      dashboard: "01・ダッシュボード",
-      import: "06-07・輸入＋Landed Cost",
-      quotation: "10・見積書",
-      sales: "10・受注 → 入金",
+      dashboard: "ダッシュボード",
+      import: "輸入管理",
+      quotation: "見積書",
+      sales: "受注管理",
     },
     common: {
       product: "商品", qty: "数量", price: "単価", amount: "金額", cost: "原価", profit: "利益", margin: "粗利率",
