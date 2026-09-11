@@ -5,7 +5,7 @@ export type Lang = "zh" | "ja";
 export interface Dict {
   brand: string; loginAs: string; loading: string; connError: (msg: string) => string;
   nav: { dashboard: string; import: string; quotation: string; sales: string };
-  common: { product: string; qty: string; price: string; amount: string; cost: string; profit: string; margin: string; selectProduct: string; addProduct: string; save: string; loadingDots: string; noData: string };
+  common: { product: string; qty: string; price: string; amount: string; cost: string; profit: string; margin: string; selectProduct: string; addProduct: string; save: string; cancel: string; edit: string; delete: string; loadingDots: string; noData: string };
   dashboard: {
     title: string; subtitle: string; company: string; thisMonthImport: string; importCount: string;
     inventoryValue: string; inventoryQty: string; thisMonthSales: string; thisMonthMargin: string;
@@ -17,6 +17,11 @@ export interface Dict {
     items: string; unitPrice: string; addProduct: string; createImport: string; landedUnitCost: string;
     step2: string; category: string; amount: string; allocationMethod: string; allocatedAmount: string;
     addCostItem: string; method: string; step3: string;
+    draftEditHint: string; correctHint: string; correct: string; correctionReason: string;
+    correctionReasonPlaceholder: string; correctionQtyDelta: string; correctionCostDelta: string;
+    submitCorrection: string; correctionHistory: string; qtyDelta: string; costDelta: string;
+    reason: string; time: string; landedUnitCostBefore: string; landedUnitCostAfter: string;
+    deleteCostItemConfirm: string;
   };
   quotation: { title: string; subtitle: string; seller: string; customer: string; createQuotation: string; convert: string; marginLow: string };
   sales: {
@@ -40,8 +45,8 @@ const dict: Record<Lang, Dict> = {
     },
     common: {
       product: "商品", qty: "數量", price: "單價", amount: "金額", cost: "成本", profit: "利潤", margin: "毛利率",
-      selectProduct: "選擇商品", addProduct: "+ 新增商品", save: "儲存", loadingDots: "載入中…",
-      noData: "無資料",
+      selectProduct: "選擇商品", addProduct: "+ 新增商品", save: "儲存", cancel: "取消", edit: "編輯", delete: "刪除",
+      loadingDots: "載入中…", noData: "無資料",
     },
     dashboard: {
       title: "總覽", subtitle: "進口／庫存／銷售／利潤 — 即時總覽", company: "公司",
@@ -59,6 +64,15 @@ const dict: Record<Lang, Dict> = {
       step2: "2. 新增成本項目 Cost Item", category: "類別", amount: "金額 (JPY)",
       allocationMethod: "分攤方式", allocatedAmount: "分攤金額", addCostItem: "新增並自動分攤",
       method: "方式", step3: "3. Finalize — 產生 Landed Cost ＋ GRACE 庫存",
+      draftEditHint: "尚未 Finalize,數量／單價可直接編輯",
+      correctHint: "已完成 Finalize,如需更正請使用「更正」",
+      correct: "更正", correctionReason: "更正原因",
+      correctionReasonPlaceholder: "例如:實際運費發票金額與估計不同",
+      correctionQtyDelta: "數量異動（+/-，可留空）", correctionCostDelta: "成本異動 JPY（+/-，可留空）",
+      submitCorrection: "送出更正", correctionHistory: "更正紀錄",
+      qtyDelta: "數量異動", costDelta: "成本異動", reason: "原因", time: "時間",
+      landedUnitCostBefore: "更正前單位成本", landedUnitCostAfter: "更正後單位成本",
+      deleteCostItemConfirm: "確定要刪除這筆成本項目嗎？",
     },
     quotation: {
       title: "報價單", subtitle: "選商品即帶入成本，輸入售價即時試算毛利率", seller: "賣方",
@@ -87,8 +101,8 @@ const dict: Record<Lang, Dict> = {
     },
     common: {
       product: "商品", qty: "数量", price: "単価", amount: "金額", cost: "原価", profit: "利益", margin: "粗利率",
-      selectProduct: "商品を選択", addProduct: "＋ 商品を追加", save: "保存", loadingDots: "読み込み中…",
-      noData: "データなし",
+      selectProduct: "商品を選択", addProduct: "＋ 商品を追加", save: "保存", cancel: "キャンセル", edit: "編集", delete: "削除",
+      loadingDots: "読み込み中…", noData: "データなし",
     },
     dashboard: {
       title: "ダッシュボード", subtitle: "輸入／在庫／販売／利益 — リアルタイム概況", company: "会社",
@@ -106,6 +120,15 @@ const dict: Record<Lang, Dict> = {
       step2: "2. コスト項目を追加", category: "カテゴリー", amount: "金額 (JPY)",
       allocationMethod: "配賦方法", allocatedAmount: "配賦金額", addCostItem: "追加して自動配賦",
       method: "方法", step3: "3. Finalize — Landed Cost ＋ GRACE 在庫を計上",
+      draftEditHint: "Finalize 前は数量／単価を直接編集できます",
+      correctHint: "Finalize 済みです。修正する場合は「更正」を使ってください",
+      correct: "更正", correctionReason: "更正理由",
+      correctionReasonPlaceholder: "例：実際の運賃請求額が見積もりと異なった",
+      correctionQtyDelta: "数量差異（+/-、空欄可）", correctionCostDelta: "コスト差異 JPY（+/-、空欄可）",
+      submitCorrection: "更正を送信", correctionHistory: "更正履歴",
+      qtyDelta: "数量差異", costDelta: "コスト差異", reason: "理由", time: "日時",
+      landedUnitCostBefore: "更正前の単位原価", landedUnitCostAfter: "更正後の単位原価",
+      deleteCostItemConfirm: "このコスト項目を削除しますか？",
     },
     quotation: {
       title: "見積書", subtitle: "商品を選ぶと原価が自動反映、販売価格入力で粗利率を即時計算", seller: "売主",
