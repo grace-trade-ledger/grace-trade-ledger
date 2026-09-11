@@ -120,7 +120,7 @@ export default function SalesChainPage({ salesOrderId, onSelect }: { salesOrderI
           )}
 
           {invoice && (
-            <div className="card" style={{ marginTop: 14, background: "var(--surface-2)" }}>
+            <div className="card" style={{ marginTop: 14, background: "var(--surface-sunken)" }}>
               <h2>{invoice.invoiceNo} <span className="pill neutral">{invoice.status}</span></h2>
               <table>
                 <thead><tr><th>{t.common.product}</th><th className="num">{t.common.amount}</th><th className="num">{t.common.cost}</th><th className="num">{t.common.profit}</th><th className="num">{t.common.margin}</th></tr></thead>

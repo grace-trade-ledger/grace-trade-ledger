@@ -73,15 +73,21 @@ export default function Dashboard() {
               <table>
                 <thead><tr><th>{t.dashboard.lot}</th><th>{t.common.product}</th><th className="num">{t.dashboard.daysLeft}</th></tr></thead>
                 <tbody>
-                  {data.alerts.expiring.map((r) => (
-                    <tr key={r.lot_no}>
-                      <td>{r.lot_no}</td>
-                      <td>{r.product_code}</td>
-                      <td className="num">
-                        <span className={`pill ${Number(r.days_left) <= 7 ? "bad" : "warn"}`}>{r.days_left} {t.dashboard.days}</span>
-                      </td>
-                    </tr>
-                  ))}
+                  {data.alerts.expiring.map((r) => {
+                    const days = Number(r.days_left);
+                    const isExpired = days < 0;
+                    return (
+                      <tr key={r.lot_no}>
+                        <td className="mono">{r.lot_no}</td>
+                        <td>{r.product_code}</td>
+                        <td className="num">
+                          <span className={`pill ${isExpired ? "bad" : days <= 7 ? "warn" : "neutral"}`}>
+                            {isExpired ? t.dashboard.expired : `${days} ${t.dashboard.days}`}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
                   {data.alerts.expiring.length === 0 && <tr><td colSpan={3} className="hint">{t.dashboard.noExpiring}</td></tr>}
                 </tbody>
               </table>
