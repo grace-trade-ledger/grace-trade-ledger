@@ -9,7 +9,7 @@ export interface Dict {
   dashboard: {
     title: string; subtitle: string; company: string; thisMonthImport: string; importCount: string;
     inventoryValue: string; inventoryQty: string; thisMonthSales: string; thisMonthMargin: string;
-    top10: string; value: string; expiring: string; lot: string; daysLeft: string; days: string; noExpiring: string;
+    top10: string; value: string; expiring: string; lot: string; daysLeft: string; days: string; noExpiring: string; expired: string;
   };
   import: {
     title: string; subtitle: string; step1: string; supplier: string; selectSupplier: string;
@@ -48,7 +48,7 @@ const dict: Record<Lang, Dict> = {
       thisMonthImport: "本月進口金額", importCount: "進口件數", inventoryValue: "庫存金額",
       inventoryQty: "庫存數量", thisMonthSales: "本月銷售額", thisMonthMargin: "本月毛利率",
       top10: "庫存金額 TOP 10", value: "金額", expiring: "即將到期商品（30天內）",
-      lot: "批號", daysLeft: "剩餘天數", days: "天", noExpiring: "無即將到期商品",
+      lot: "批號", daysLeft: "剩餘天數", days: "天", noExpiring: "無即將到期商品", expired: "已過期",
     },
     import: {
       title: "進口＋Landed Cost", subtitle: "建立進口案件 → 輸入成本項目 → 系統自動分攤 → Landed Unit Cost",
@@ -95,7 +95,7 @@ const dict: Record<Lang, Dict> = {
       thisMonthImport: "今月の輸入金額", importCount: "輸入件数", inventoryValue: "在庫金額",
       inventoryQty: "在庫数量", thisMonthSales: "今月の売上", thisMonthMargin: "今月の粗利率",
       top10: "在庫金額 TOP 10", value: "金額", expiring: "賞味期限間近商品（30日以内）",
-      lot: "ロット番号", daysLeft: "残り日数", days: "日", noExpiring: "賞味期限間近の商品はありません",
+      lot: "ロット番号", daysLeft: "残り日数", days: "日", noExpiring: "賞味期限間近の商品はありません", expired: "期限切れ",
     },
     import: {
       title: "輸入＋Landed Cost", subtitle: "輸入案件を作成 → コスト項目を入力 → 自動配賦 → Landed Unit Cost",
